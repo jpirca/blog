@@ -5,3 +5,7 @@ blog_homepage:
 blog_about:
     path:     /about
     defaults: { _controller: BlogBundle:Blog:about }
+
+blog_show:
+    path:     /{id}
+    defaults: { _controller: BlogBundle:Post:show }

@@ -1,6 +1,22 @@
-{# src/BlogBundle/Resources/views/Blog/index.html.twig #}
 {% extends 'BlogBundle::base.html.twig' %}
 
 {% block body %}
-    Blog homepage
+    {% for post in posts %}
+        <article class="blog">
+            <div class="date"><time datetime="{{ post.created|date('c') }}">{{ post.created|date('l, F j, Y') }}</time></div>
+            <header>
+                <h2><a href="{{ path('blog_show', { 'id': post.id }) }}">{{ post.title }}</a></h2>
+            </header>
+            <div class="snippet">
+                <p>{{ post.content(500) }}</p>
+                <p class="continue"><a href="{{ path('blog_show', { 'id': post.id }) }}">Continue reading...</a></p>
+            </div>
+            <footer class="meta">
+                <p>Comments: -</p>
+                <p>Posted by <span class="highlight">{{post.author}}</span> at {{ post.created|date('h:iA') }}</p>
+            </footer>
+        </article>
+    {% else %}
+        <p>There are no post entries for blog</p>
+    {% endfor %}
 {% endblock %}
